@@ -1,0 +1,10 @@
+<p class="metadata">
+  {{ .PublishDate.Format "January 2006" }},   
+  <a href="mailto:{{ .Params.author_email }}" class="">{{ .Params.author }}</a>,
+  read in {{ .ReadingTime }} minute<span class="{{ if (eq .ReadingTime 1) }}d-none{{ end }}">s</span>
+  <p>
+    {{ range $i, $e := .Params.tags }}
+      <span class="badge badge-warning"><a class="category" href="{{ "tags/" | relURL }}{{ . | urlize }}">{{ upper $e }}</a></span>
+    {{ end }}
+  </p>
+</p>

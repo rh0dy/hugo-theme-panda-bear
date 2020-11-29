@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="row mt-4 mb-5">
+  <div class="post offset-md-1 col-md-10 offset-md-1 text-center p-4">
+    <div class="col-md-12">
+      <div class="pb-2">
+        <h2><a class="subtitle" href="{{ .RelPermalink | relURL}}">{{ .Title }}</a></h2>
+        {{if eq .Section "post"}}
+          {{ partial "metadata.html" . }}
+        {{ end }}
+      </div>
+      <hr>
+      <article class="p-3">
+        {{ .Content }}
+      </article>	
+      {{if eq .Section "post"}}
+        <div class="post-navigation">
+          {{ with .PrevInSection }}
+              <small><a href="{{ .RelPermalink }}">&laquo; {{ .Title }}</a></small>
+          {{ end }}
+          <span class="{{if or (eq .PrevInSection nil) (eq .NextInSection nil) }}invisible{{end}} category-seperator">&middot;</span>
+          {{ with .NextInSection }}
+            <small><a href="{{ .RelPermalink }}">{{ .Title }} &raquo;</a></small>
+          {{ end }}		
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

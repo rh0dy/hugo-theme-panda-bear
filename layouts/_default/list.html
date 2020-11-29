@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="row mt-4 mb-5">
+  <div class="post offset-md-1 col-md-10 offset-md-1 text-center p-4">
+    <div class="col-md-12">
+      <div class="pb-2">
+        <h2 class="subtitle"><span class="{{ if (eq .Kind "taxonomy") }}d-none{{ end }}"><a href="{{ .Parent.RelPermalink }}">{{ title .Section }}</a> &middot; </span>{{ title .Title }}</h2>
+      </div>
+      <hr>
+      <article class="p-3">
+        <ul class="list">
+          {{ if (eq .Section "tags") }}
+            {{ range .Pages.ByTitle }}
+              <li>
+                  <a href="{{ .RelPermalink }}">{{ title .Title }}</a>
+              </li>
+            {{ end }}
+          {{ else }}
+            {{ range .Pages.ByDate }}
+              <li>
+                <a href="{{ .RelPermalink }}">{{ title .Title }}</a>
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </article>	
+    </div>
+  </div>
+</div>
+{{ end }}

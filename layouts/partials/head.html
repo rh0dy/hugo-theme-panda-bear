@@ -1,0 +1,32 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="PandaBear (Hugo Theme)">
+    <meta name="author" content="rh0dy">
+		
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ "favicon/apple-touch-icon.png" | relURL }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon/favicon-32x32.png" | relURL }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon/favicon-16x16.png" | relURL }}">
+	<link rel="manifest" href="{{ "favicon/site.webmanifest" | relURL }}">
+	<link rel="mask-icon" href="{{ "favicon/safari-pinned-tab.svg" | relURL }}" color="#5bbad5">	
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+
+	<link href="{{ "font-awesome/css/all.min.css" | relURL }}" rel="stylesheet" type="text/css" rel="preload" as="style">
+	<link href="{{ "bootstrap/css/bootstrap.min.css" | relURL }}" rel="stylesheet" type="text/css" rel="preload" as="style">
+	<link href="{{ "css/style.css" | relURL }}" rel="stylesheet" type="text/css" rel="preload" as="style">
+
+	{{ if .IsHome }}
+		{{ if isset .Site.Params "website_description" }}	  
+			<title>{{ print .Site.Title " &middot; " .Site.Params.Website_Description | safeHTML }}</title>
+		{{ else }}
+	  		<title>{{ print .Site.Title | safeHTML }}</title>
+		{{ end }}
+	{{ else }}
+	  <title>{{ print .Site.Title " &middot; " .Title | safeHTML }}</title>
+	{{ end }}
+
+	{{ range .AlternativeOutputFormats -}}
+	  {{ printf `<link rel="%s" type="%s+%s" href="%s" title="%s" />` .Rel .MediaType.Type .MediaType.Suffix .Permalink $.Site.Title | safeHTML }}
+	{{ end -}}	
+</head>

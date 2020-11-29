@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="container">	
+  <!-- Post List -->
+  <div class="row">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
+    {{ range $paginator.Pages }}
+      <div class="post offset-md-1 col-md-10 offset-md-1 text-center p-4 mt-4">
+        <div class="pb-1">
+          <h2><a class="subtitle" href="{{ .RelPermalink | relURL}}">{{ .Title }}</a></h2>
+          {{ partial "metadata.html" . }}
+        </div>
+        <hr>
+        <article class="p-3">
+          {{ .Summary }}... <a href="{{ .RelPermalink | relURL}}">Continue Reading</a>
+        </article>
+      </div>
+    {{ end }}
+  </div>
+  <!-- Post Navigation -->
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pt-5 pb-5">
+        <ul class="pagination justify-content-center">
+          {{ if $paginator.HasPrev }}
+            <li class="page-item">
+              <a class="page-link" href="{{ $paginator.Prev.URL }}">&laquo; Newer Posts</a>
+            </li>
+          {{ end }}
+          <li class="page-item disabled">
+            <span class="page-link">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</span>
+          </li>
+          {{ if $paginator.HasNext }}
+            <li class="page-item">
+              <a class="page-link" href="{{ $paginator.Next.URL }}">Older Posts &raquo;</a>
+            </li>
+          {{ end }}
+        </ul>
+    </nav>
+  {{ end }}
+</div>
+{{ end }}

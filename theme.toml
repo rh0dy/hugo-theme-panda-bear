@@ -1,0 +1,14 @@
+# theme.toml template for the Panda Bear Hugo theme
+
+name = "PandaBear"
+license = "MIT"
+licenselink = "https://github.com/rh0dy/hugo-theme-panda-bear/blob/master/LICENSE"
+description = "A modern, minimal and responsive Hugo Theme for bloggers."
+homepage = "https://github.com/rh0dy/hugo-theme-panda-bear"
+tags = ["blog", "modern", "minimal", "minimalist", "light", "clean", "simple", "monochromatic", "personal", "professional", "reading", "responsive", "mobile", "bootstrap", "seo"]
+features = ["responsive", "bootstrap", "font-awesome", "seo", "menu", "social", "favicon", "custom-404"]
+min_version = "0.78.2"
+
+[author]
+    name = "rh0dy"
+    homepage = "https://github.com/rh0dy/hugo-theme-panda-bear"

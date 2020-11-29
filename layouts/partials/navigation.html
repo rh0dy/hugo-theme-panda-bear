@@ -1,0 +1,42 @@
+<!-- Logo & Title -->
+<div class="text-center mt-5 mb-4">
+  <a href="{{ .Site.BaseURL }}" class="header">
+    <img class="logo" src="{{ "img/logo.svg" | relURL }}" alt="{{ .Site.Title }}" width="75px" height="75px" />
+    <h1 class="title">{{ .Site.Title }}</h1>
+  </a>
+</div>
+<!-- Navigation Menu -->
+<nav class="navbar navbar-light navbar-expand-md bg-light justify-content-md-center">
+  <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsingNavbar">
+    <ul class="navbar-nav mx-auto">
+      {{ $current := . }}
+      {{ with .Site.Menus.main }}
+        {{ range sort . ".Weight" }}  
+          {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+          {{ $active = or $active (eq .Name $current.Title) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Section "post")) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Title "Tags")) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Section "tags") (ne $current.Title "")) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Title "Categories")) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Section "categories") (ne $current.Title "")) }}
+          {{ $active = or $active (and (eq .Name "Blog") (eq $current.Title "404 Page not found")) }}
+          <li class="navbar-item">
+            <a class="nav-link {{ if $active }}nav-link-active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
+          </li>
+        {{ end }}
+      {{ end }}
+      <!-- Social Links -->
+      {{ with .Site.Params.social }}
+        {{ range . }}
+          <li class="nav-item"> 
+            <a href="{{ .url }}" class=><i class="fab fa-{{ .name }}"></i></a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+</nav>
+
